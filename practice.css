@@ -1,0 +1,107 @@
+:root {
+    --timing: 700ms;
+    --deg: 20deg;
+}
+
+html {
+    color-scheme: dark;
+}
+
+body {
+    display: grid;
+    place-content: center;
+    min-height: 100vh;
+    perspective: 1000px;
+}
+
+img {
+    max-width: 100%;
+}
+
+.spiderman {
+    width: 300px;
+    position: relative;
+    aspect-ratio: 9/15;
+    transform-style: preserve-3d;
+}
+
+.spiderman-bg {
+    position: absolute;
+    z-index: 10;
+    height: 100%;
+    object-fit: cover;
+    object-position: -100px bottom;
+    filter: brightness(1.4);
+}
+
+.logo,
+.front-image {
+    position: absolute;
+    left: 10px;
+    bottom: 20px;
+}
+
+.logo {
+    z-index: 1000;
+    width: 65%;
+    margin-inline: auto;
+    inset: auto 0 0.5rem;
+    transform: translateY(0rem) translateZ(20px);
+    transition: var(--timing);
+}
+
+.front-image {
+    scale: 1.125;
+    opacity: 0;
+    z-index: 10;
+    transition: var(--timing);
+    filter: brightness(0.75)
+}
+
+
+.spiderman:hover {
+    rotate: x var(--deg);
+}
+
+.spiderman:hover .logo,
+.spiderman:hover .front-image {
+    opacity: 1;
+    transform: translateY(-1rem) translateZ(20px);
+    rotate: x calc(var(--deg) * -1);
+}
+
+.spiderman:hover .front-image {
+    transform: translateY(-6rem) translateZ(20px);
+    rotate: x calc(var(--deg) * -1);
+}
+
+.spiderman::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 100;
+    background-image: radial-gradient(circle, transparent 150px, black);
+    opacity: 0;
+    transition: opacity var(--timing);
+}
+
+.spiderman:hover:before {
+    opacity: 1;
+}
+
+.spiderman::after {
+    content: "";
+    position: absolute;
+    inset: 80% 1rem 1rem;
+    translate: 0;
+    transform: translateZ(-50px);
+    z-index: 1;
+    background: black;
+    filter: blur(1rem);
+    transition: rotate var(--deg), translate var(--timing);
+}
+
+.spiderman:hover::after {
+    rotate: x calc(var(--deg) * -1);
+    translate: 0px 60px;
+}
