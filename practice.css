@@ -23,6 +23,7 @@ img {
     position: relative;
     aspect-ratio: 9/15;
     transform-style: preserve-3d;
+    transition: rotate var(--timing) ease;
 }
 
 .spiderman-bg {
@@ -66,7 +67,7 @@ img {
 .spiderman:hover .logo,
 .spiderman:hover .front-image {
     opacity: 1;
-    transform: translateY(-1rem) translateZ(20px);
+    transform: translateY(-2rem) translateZ(20px);
     rotate: x calc(var(--deg) * -1);
 }
 
@@ -80,7 +81,7 @@ img {
     position: absolute;
     inset: 0;
     z-index: 100;
-    background-image: radial-gradient(circle, transparent 150px, black);
+    background-image: radial-gradient(circle, transparent 190px, black);
     opacity: 0;
     transition: opacity var(--timing);
 }
@@ -92,7 +93,7 @@ img {
 .spiderman::after {
     content: "";
     position: absolute;
-    inset: 80% 1rem 1rem;
+    inset: 80% 0.5rem 0.5rem;
     translate: 0;
     transform: translateZ(-50px);
     z-index: 1;
