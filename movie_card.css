@@ -1,0 +1,115 @@
+:root {
+    --rotate: 20deg;
+    --timing: 700ms;
+}
+
+html {
+    color-scheme: dark;
+}
+
+
+body {
+    min-height: 100vh;
+}
+
+img {
+    max-width: 100%;
+}
+
+.container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin: 5% auto;
+    perspective-origin: center;
+}
+
+
+.movie {
+    position: relative;
+    width: 300px;
+    aspect-ratio: 9/15;
+    margin: 5% auto;
+    transform-style: preserve-3d;
+    transition: rotate var(--rotate) ease;
+}
+
+.movie:before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 100;
+    background-image: radial-gradient(circle, transparent 150px, black);
+    opacity: 0;
+    transition: opacity var(--timing);
+}
+
+.movie:hover::before {
+    opacity: 1;
+}
+
+.movie::after {
+    content: "";
+    position: absolute;
+    inset: 80% 1.2rem 0.5rem;
+    background: black;
+    z-index: 1;
+    transform: translateZ(-100px);
+    filter: blur(1rem);
+    transition:
+        rotate var(--rotate),
+        translate var(--timing);
+}
+
+.movie:hover::after {
+    rotate: x calc(var(--rotate) * -1);
+    translate: 0 50px;
+}
+
+.movie:hover {
+    rotate: x 15deg;
+    cursor: pointer;
+}
+
+
+.movie-bg {
+    z-index: 10;
+    position: absolute;
+    height: 100%;
+    object-fit: cover;
+    object-position: -120px bottom;
+    filter: brightness(1);
+}
+
+.movie-logo {
+    z-index: 10;
+    width: 85%;
+    margin-inline: auto;
+    inset: auto 0 0.5em;
+    transform: translateY(-1rem) translateZ(20px);
+    transition: var(--timing);
+}
+
+.movie:hover .movie-logo,
+.movie:hover .movie-front-image {
+    opacity: 1;
+    transform: translateY(-2rem) translateZ(20px);
+    rotate: x calc(var(--rotate) * -1);
+}
+
+.movie-front-image {
+    z-index: 5;
+    scale: 1.125;
+    opacity: 0;
+    transition: var(--timing);
+    filter: brightness(0.75)
+}
+
+.movie-logo {
+    position: absolute;
+}
+
+.movie-front-image {
+    position: absolute;
+    top: 70px;
+}
